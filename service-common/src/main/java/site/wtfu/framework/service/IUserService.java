@@ -1,5 +1,8 @@
 package site.wtfu.framework.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import site.wtfu.framework.beans.User;
 
 import java.util.List;
@@ -13,8 +16,10 @@ import java.util.List;
  *                          @author 12302
  *
  */
+@FeignClient(name = "service-provider-user-name")
 public interface IUserService {
 
-    List<User> getUsers(Integer director);
+    @GetMapping("/getUserInfo/{psnId}")
+    List<User> getUsers(@PathVariable(name = "psnId") Integer director);
 
 }

@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import site.wtfu.framework.beans.User;
+import site.wtfu.framework.service.IUserService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,10 +23,10 @@ import java.util.ArrayList;
 public class TestConsumerController {
 
     @Autowired
-    public RestTemplate restTemplate;
+    private IUserService userService;
 
     @RequestMapping(value = "test")
     public Object test(){
-        return restTemplate.getForObject("http://service-provider-user-name/getUserInfo/" + 10, ArrayList.class);
+        return userService.getUsers(10);
     }
 }
